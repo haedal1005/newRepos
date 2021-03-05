@@ -106,6 +106,8 @@ public class MainController {
 
         list = userService.getUser();
 
+        System.out.println("앙 수정띠");
+
         if(list.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }else {

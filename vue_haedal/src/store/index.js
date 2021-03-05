@@ -18,12 +18,6 @@ export default new Vuex.Store({
         READ_INFO(state, payload) {
             state.userList = payload
         },
-        READ_INFO_ONE(state, payload) {
-            state.name = state.userList[payload].name
-            state.title = state.userList[payload].title
-            state.content = state.userList[payload].content
-            state.pw = state.userList[payload].pw
-        },
         ADD_INFO(state, payload) {
             state.name = payload.name
             state.title = payload.title
@@ -31,7 +25,7 @@ export default new Vuex.Store({
             state.pw = payload.pw
         },
         UPDATE_INFO(state, payload) {
-            if (state.pw == payload.pw) {
+            if (state.userList.b_pw == payload.pw) {
                 state.name = payload.name
                 state.title = payload.title
                 state.content = payload.content
@@ -87,8 +81,11 @@ export default new Vuex.Store({
         updateUser(context, payload) {
             http
                 .put("/board", {
-                    b_id: `${payload}`, b_name: this.updateName, b_title: this.updateTitle,
-                    b_content: this.updateContent, b_pw: this.updatePw
+                    b_id: `${payload}`,
+                    //구문 이상 추정
+                    b_name: context.state.name,
+                    b_title: context.state.title,
+                    b_content: context.state.content
                 })
                 .then(res => {
                     context.commit("READ_INFO", res.data)

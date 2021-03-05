@@ -22,7 +22,7 @@
     </delete>
 
     <update id="updateUser" parameterType="com.dial.dial_web.dto.User">
-        update dial.board set b_name = #{b_name}, b_title = #{b_title}, b_content = #{b_content}, b_pw = #{b_pw}
+        update dial.board set b_name = #{b_name}, b_title = #{b_title}, b_content = #{b_content}
         where b_id = #{b_id}
     </update>
 

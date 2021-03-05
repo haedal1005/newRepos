@@ -54,11 +54,10 @@ export default {
       // content: '',
       // pw: "",
       id: id,
-      name: id !== undefined ? this.$store.state.userList[id].name : "",
-      title: id !== undefined ? this.$store.state.userList[id].title : "",
-      content: id !== undefined ? this.$store.state.userList[id].content : "",
-      password: id !== undefined ? "****" : "",
-      //21.03.04 id를 인식하지 못하고 있음
+      name: id !== undefined ? this.$store.state.userList.b_name : "",
+      title: id !== undefined ? this.$store.state.userList.b_title : "",
+      content: id !== undefined ? this.$store.state.userList.b_content : "",
+      pw: id !== undefined ? "****" : "",
     }
   },
   methods: {
@@ -90,37 +89,30 @@ export default {
       })
     },
     update() {
-      if (!this.writer) {
+      if (!this.name) {
         alert("글쓴이를 입력해 주세요");
       } else if (!this.title) {
         alert("제목을 입력해 주세요");
       } else if (!this.content) {
         alert("내용을 입력해 주세요");
-      } else if (!this.password) {
+      } else if (!this.pw) {
         alert("비밀번호를 입력해 주세요");
       } else {
-        // if(data[this.id].password == this.password){
-        //   data[this.id].writer = this.writer
-        //   data[this.id].title = this.title
-        //   data[this.id].content = this.content
-        //   this.$router.push({
-        //     path: '/read'
-        //   })
-        // }
-        // else{
-        //   alert("비밀번호가 다릅니다.")
-        // }
-        this.$store.commit('READ_INFO_ONE', id);
         this.$store.commit('UPDATE_INFO', {
           name: this.name,
           title: this.title,
           content: this.content,
           pw: this.pw
         });
+        this.$store.dispatch('updateUser', $store.state.userList.b_id);
       }
     }
+    },
+    created() {
+      const id = this.$route.params.contentId;
+      this.$store.dispatch('readUserOne', id)
+    }
   }
-}
 </script>
 
 <style scoped>
