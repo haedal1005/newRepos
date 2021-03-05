@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dial.board">
+
+    <select id="getUser" resultType="com.dial.dial_web.dto.User">
+        SELECT * FROM BOARD
+    </select>
+
+    <select id="getUserOne" resultType="com.dial.dial_web.dto.User"
+            parameterType="java.lang.Integer">
+        SELECT * from dial.BOARD where b_id = #{id}
+    </select>
+    
+    <insert id="addUser" parameterType="com.dial.dial_web.dto.User">
+        insert into dial.board(b_name, b_title, b_content, b_pw) values(#{b_name}, #{b_title}, #{b_content}, #{b_pw})
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from dial.board where b_id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.dial.dial_web.dto.User">
+        update dial.board set b_name = #{b_name}, b_title = #{b_title}, b_content = #{b_content}, b_pw = #{b_pw}
+        where b_id = #{b_id}
+    </update>
+
+</mapper>
