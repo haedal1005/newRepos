@@ -26,9 +26,11 @@ export default new Vuex.Store({
         },
         UPDATE_INFO(state, payload) {
             if (state.userList.b_pw == payload.pw) {
+                state.id = state.userList.b_id
                 state.name = payload.name
                 state.title = payload.title
                 state.content = payload.content
+                state.pw = payload.pw
             } else {
                 alert("비밀번호가 다릅니다.")
             }
@@ -82,7 +84,6 @@ export default new Vuex.Store({
             http
                 .put("/board", {
                     b_id: `${payload}`,
-                    //구문 이상 추정
                     b_name: context.state.name,
                     b_title: context.state.title,
                     b_content: context.state.content

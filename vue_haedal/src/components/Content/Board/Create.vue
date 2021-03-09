@@ -32,27 +32,14 @@
     <a href="javascript:;" @click="id !== undefined ? update() : addUser()" class="btnAdd btn">{{id !== undefined ? '수정' : '작성'}}</a>
   </div>
 </div>
-<!-- <div>
-        <input v-model="writer" placeholder="글쓴이"/>
-        <input v-model="title" placeholder="제목"/>
-        <textarea v-model="content" placeholder="내용"/>
-        <button @click="index !== undefined ? update() : write()">{{index !== undefined ? '수정' : '작성'}}</button>
-    </div> -->
 </template>
 <script>
-import data from '@/data'
-import http from '../../../services/http-common.js'
-
 export default {
   name: 'Create',
   data() {
     const id = this.$route.params.contentId;
     return {
       userList: [],
-      // name: '',
-      // title: '',
-      // content: '',
-      // pw: "",
       id: id,
       name: id !== undefined ? this.$store.state.userList.b_name : "",
       title: id !== undefined ? this.$store.state.userList.b_title : "",
@@ -104,13 +91,15 @@ export default {
           content: this.content,
           pw: this.pw
         });
-        this.$store.dispatch('updateUser', $store.state.userList.b_id);
+        this.$store.dispatch('updateUser', this.$store.state.id);
+        this.$router.push({
+        path: '/read'
+      })
       }
     }
     },
     created() {
       const id = this.$route.params.contentId;
-      this.$store.dispatch('readUserOne', id)
     }
   }
 </script>
